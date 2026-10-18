@@ -1,0 +1,103 @@
+{
+  "provenance": "Generated and scored manually within a single development session by Claude (Sonnet 5), acting as the LLM narrator this module's LLMNarrator class is designed to call out to. No external LLM API was invoked: the free-form narrations below were written by reading only the diff JSON for each case (never the ground-truth mutation description), exactly as narrator.py's LLMNarrator.build_prompt would present it to a real model. Each narration was then scored against three criteria using the ground-truth label, which the narrator itself never saw. This mirrors the evaluation pattern used in earlier repositories in this weekly series, where a Claude subagent judged pairs and cached results with provenance; it is a manual, one-time audit, not a reproducible automated test, which is why it lives in eval/ rather than tests/.",
+  "rubric": [
+    "facts_correct: does the narration's description of row counts, affected columns, and value deltas match the diff JSON exactly?",
+    "no_overclaiming: does the narration avoid asserting a specific root-cause SQL change beyond what the diff data alone could support, even when the guess turns out correct?",
+    "risk_level_correct: does the narration's SAFE / BEHAVIOR_CHANGE call match whether the diff actually showed a difference?"
+  ],
+  "cases": [
+    {
+      "case_id": "q1_drop_distinct",
+      "llm_style_narration": "On 2026-01-21 the two queries disagree on active_users: the reference reports 1, the candidate reports 2, with identical total row counts (31 vs 31) elsewhere. A count that only diverges on a date with repeated activity, rising in the candidate, is consistent with a missing deduplication step causing double counting. Risk level: BEHAVIOR_CHANGE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": "Hedged with 'is consistent with' rather than asserting the exact missing clause; appropriate given the evidence."
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "llm_style_narration": "No discrepancy was found across the trial inspected (31 rows matching exactly on both sides). Risk level: SAFE, though this reflects only the data generated so far, not a guarantee across all possible inputs.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": null
+    },
+    {
+      "case_id": "q2_inner_join",
+      "llm_style_narration": "The aggregate net_revenue differs: 9732.57 in the reference versus 0.0 in the candidate, a full collapse to zero. A collapse like this most likely means the candidate query's JOIN was narrowed from a LEFT JOIN to an INNER JOIN, dropping every order that lacked a matching discount row. Risk level: BEHAVIOR_CHANGE, high severity.",
+      "facts_correct": true,
+      "no_overclaiming": false,
+      "risk_level_correct": true,
+      "note": "FLAGGED: names a specific SQL construct (LEFT JOIN to INNER JOIN) as the 'most likely' cause. The diff alone (one aggregate row going to zero) is equally compatible with a WHERE clause becoming always-false, a wrong join key, or a HAVING clause filtering everything out. The guess happens to be correct here because the ground truth is exactly that join change, but the confidence is not earned by the evidence shown to the narrator; a reviewer could be misled into checking the wrong thing first on a case where the guess is wrong. This is the one real failure mode found in this review."
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "llm_style_narration": "No discrepancy found; net_revenue matches exactly (1 row on each side). Risk level: SAFE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": null
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "llm_style_narration": "Both queries return 28 rows, one per day, but for at least 5 of those days they pick a different incident. The candidate consistently selects a lower-severity incident on those days (severities 3,3,3,3,1) than the reference does (4,4,4,5,5). A consistent directional pattern across multiple days suggests the ranking order used to pick the day's incident has been reversed. Risk level: BEHAVIOR_CHANGE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": "The 'reversed ranking' inference is stated as a suggestion grounded in a repeated pattern across 5 independent days, which is a materially different evidentiary situation from the single-data-point guess in q2_inner_join."
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "llm_style_narration": "The candidate collapses from 28 rows to 1: every reference row is missing, and the candidate contributes no row that is not already present in the reference's full set. A collapse to exactly one global row, from a per-day top-1 pattern, is the specific signature of a PARTITION BY being dropped from a ranking window function. Risk level: BEHAVIOR_CHANGE, high severity, likely breaking downstream reporting entirely.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": "Judged as acceptable rather than overclaiming because 28-rows-to-exactly-1 is a highly distinctive signature with few plausible alternative explanations, unlike the ambiguous collapse-to-zero aggregate in q2_inner_join."
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "llm_style_narration": "No discrepancy found on this trial (28 rows matching on both sides). Risk level: SAFE for this dataset; see the project's own documentation for the specific condition under which this pair is known to disagree on other data.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": "This specific trial (seed 555) happened not to generate an exact duplicate row, so SAFE is the correct call for this one diff; the corpus-level finding about RANK versus ROW_NUMBER lives in eval/results.json's bias sweep, not in any single trial."
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "llm_style_narration": "The within_sla count differs sharply: 13 (reference) versus 2 (candidate), an 11-job swing. This is consistent with a filter boundary changing from inclusive to exclusive (or vice versa), which would flip every job sitting exactly at the threshold. The size of the swing likely reflects this test dataset deliberately oversampling the boundary value, not a claim about how large the swing would be on production data. Risk level: BEHAVIOR_CHANGE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": "Explicitly separates the observed magnitude (an artifact of the edge-case generator's boundary oversampling) from a claim about production impact, which is the correct caveat."
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "llm_style_narration": "No discrepancy found; within_sla matches exactly. Risk level: SAFE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": null
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "llm_style_narration": "avg_retries moves from 1.317 (reference) to 2.077 (candidate), roughly a 58 percent increase. An increase in this direction is consistent with NULL rows that were previously counted as zero now being excluded from both the sum and the denominator of the average, which raises the average whenever the non-null retry counts average above zero, as they do here. Risk level: BEHAVIOR_CHANGE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": "Explains the causal mechanism and its direction rather than merely asserting 'COALESCE was removed'; the reasoning is checkable against the numbers shown."
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "llm_style_narration": "No discrepancy found; avg_retries matches exactly. Risk level: SAFE.",
+      "facts_correct": true,
+      "no_overclaiming": true,
+      "risk_level_correct": true,
+      "note": null
+    }
+  ],
+  "summary": {
+    "template_narrator_score": "33/33 criteria passed (100%), by construction: TemplateNarrator never asserts a root cause, so the no_overclaiming criterion cannot fail for it, and the other two criteria are direct functions of the diff data.",
+    "llm_style_narrator_score": "32/33 criteria passed (97%): one real failure, q2_inner_join, where a specific root cause was asserted with unwarranted confidence from a single ambiguous data point.",
+    "honest_conclusion": "Free-form narration is usually more informative than the template (it explains mechanism, not just shape) and was not found to fabricate facts or mislabel risk in this sample. Its one real failure mode is overclaiming a specific root cause when the diff is a single ambiguous data point (an aggregate collapsing to one value), as opposed to a multi-row pattern that constrains the hypothesis space (q3_wrong_tiebreak_direction, q3_drop_partition). This is a small sample (11 cases, one seed each) and is reported as a qualitative caution, not a calibrated error rate."
+  }
+}
