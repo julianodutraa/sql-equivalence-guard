@@ -1,0 +1,3125 @@
+{
+  "base_seed": 20261018,
+  "rows_per_trial": 40,
+  "trial_checkpoints": [
+    20,
+    100,
+    500
+  ],
+  "bias_levels": [
+    0.0,
+    0.15,
+    0.35
+  ],
+  "wall_clock_seconds": 197.04,
+  "results": [
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 1,
+      "kill_rate": 0.05,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261020,
+        "n_rows_a": 28,
+        "n_rows_b": 28,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-30",
+            1
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-30",
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 7,
+      "kill_rate": 0.07,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261020,
+        "n_rows_a": 28,
+        "n_rows_b": 28,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-30",
+            1
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-30",
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 39,
+      "kill_rate": 0.078,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261020,
+        "n_rows_a": 28,
+        "n_rows_b": 28,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-30",
+            1
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-30",
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10050.5295
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10050.5295
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10050.5295
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 30,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-25",
+            79477,
+            5
+          ],
+          [
+            "2026-01-12",
+            42847,
+            2
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ],
+          [
+            "2026-01-07",
+            83627,
+            4
+          ],
+          [
+            "2026-01-23",
+            65465,
+            5
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-25",
+            96029,
+            2
+          ],
+          [
+            "2026-01-09",
+            90208,
+            2
+          ],
+          [
+            "2026-01-12",
+            67135,
+            1
+          ],
+          [
+            "2026-01-28",
+            45508,
+            2
+          ],
+          [
+            "2026-01-07",
+            5822,
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 7,
+        "total_rows_only_in_b": 7
+      }
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 30,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-25",
+            79477,
+            5
+          ],
+          [
+            "2026-01-12",
+            42847,
+            2
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ],
+          [
+            "2026-01-07",
+            83627,
+            4
+          ],
+          [
+            "2026-01-23",
+            65465,
+            5
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-25",
+            96029,
+            2
+          ],
+          [
+            "2026-01-09",
+            90208,
+            2
+          ],
+          [
+            "2026-01-12",
+            67135,
+            1
+          ],
+          [
+            "2026-01-28",
+            45508,
+            2
+          ],
+          [
+            "2026-01-07",
+            5822,
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 7,
+        "total_rows_only_in_b": 7
+      }
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 30,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-25",
+            79477,
+            5
+          ],
+          [
+            "2026-01-12",
+            42847,
+            2
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ],
+          [
+            "2026-01-07",
+            83627,
+            4
+          ],
+          [
+            "2026-01-23",
+            65465,
+            5
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-25",
+            96029,
+            2
+          ],
+          [
+            "2026-01-09",
+            90208,
+            2
+          ],
+          [
+            "2026-01-12",
+            67135,
+            1
+          ],
+          [
+            "2026-01-28",
+            45508,
+            2
+          ],
+          [
+            "2026-01-07",
+            5822,
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 7,
+        "total_rows_only_in_b": 7
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-25",
+            79477,
+            5
+          ],
+          [
+            "2026-01-09",
+            64017,
+            4
+          ],
+          [
+            "2026-01-25",
+            7242,
+            2
+          ],
+          [
+            "2026-02-22",
+            20503,
+            3
+          ],
+          [
+            "2026-01-02",
+            33440,
+            2
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 29,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-25",
+            79477,
+            5
+          ],
+          [
+            "2026-01-09",
+            64017,
+            4
+          ],
+          [
+            "2026-01-25",
+            7242,
+            2
+          ],
+          [
+            "2026-02-22",
+            20503,
+            3
+          ],
+          [
+            "2026-01-02",
+            33440,
+            2
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 29,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-25",
+            79477,
+            5
+          ],
+          [
+            "2026-01-09",
+            64017,
+            4
+          ],
+          [
+            "2026-01-25",
+            7242,
+            2
+          ],
+          [
+            "2026-02-22",
+            20503,
+            3
+          ],
+          [
+            "2026-01-02",
+            33440,
+            2
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 29,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 5,
+      "kill_rate": 0.05,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261038,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 29,
+      "kill_rate": 0.058,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261038,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.0,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 24,
+        "n_rows_b": 24,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-24",
+            1
+          ],
+          [
+            "2026-02-03",
+            1
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-24",
+            2
+          ],
+          [
+            "2026-02-03",
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 2,
+        "total_rows_only_in_b": 2
+      }
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 24,
+        "n_rows_b": 24,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-24",
+            1
+          ],
+          [
+            "2026-02-03",
+            1
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-24",
+            2
+          ],
+          [
+            "2026-02-03",
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 2,
+        "total_rows_only_in_b": 2
+      }
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 24,
+        "n_rows_b": 24,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-24",
+            1
+          ],
+          [
+            "2026-02-03",
+            1
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-24",
+            2
+          ],
+          [
+            "2026-02-03",
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 2,
+        "total_rows_only_in_b": 2
+      }
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10235.6681
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10235.6681
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10235.6681
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 29,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-18",
+            21524,
+            3
+          ],
+          [
+            "2026-01-26",
+            45910,
+            4
+          ],
+          [
+            "2026-01-10",
+            98044,
+            4
+          ],
+          [
+            "2026-02-14",
+            1210,
+            3
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-18",
+            56790,
+            1
+          ],
+          [
+            "2026-01-07",
+            5822,
+            1
+          ],
+          [
+            "2026-02-12",
+            53105,
+            1
+          ],
+          [
+            "2026-02-02",
+            83865,
+            1
+          ],
+          [
+            "2026-01-26",
+            16578,
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 9,
+        "total_rows_only_in_b": 9
+      }
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 29,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-18",
+            21524,
+            3
+          ],
+          [
+            "2026-01-26",
+            45910,
+            4
+          ],
+          [
+            "2026-01-10",
+            98044,
+            4
+          ],
+          [
+            "2026-02-14",
+            1210,
+            3
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-18",
+            56790,
+            1
+          ],
+          [
+            "2026-01-07",
+            5822,
+            1
+          ],
+          [
+            "2026-02-12",
+            53105,
+            1
+          ],
+          [
+            "2026-02-02",
+            83865,
+            1
+          ],
+          [
+            "2026-01-26",
+            16578,
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 9,
+        "total_rows_only_in_b": 9
+      }
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 29,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-18",
+            21524,
+            3
+          ],
+          [
+            "2026-01-26",
+            45910,
+            4
+          ],
+          [
+            "2026-01-10",
+            98044,
+            4
+          ],
+          [
+            "2026-02-14",
+            1210,
+            3
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-18",
+            56790,
+            1
+          ],
+          [
+            "2026-01-07",
+            5822,
+            1
+          ],
+          [
+            "2026-02-12",
+            53105,
+            1
+          ],
+          [
+            "2026-02-02",
+            83865,
+            1
+          ],
+          [
+            "2026-01-26",
+            16578,
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 9,
+        "total_rows_only_in_b": 9
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-09",
+            29341,
+            3
+          ],
+          [
+            "2026-01-25",
+            7242,
+            2
+          ],
+          [
+            "2026-02-22",
+            20503,
+            3
+          ],
+          [
+            "2026-01-02",
+            50361,
+            3
+          ],
+          [
+            "2026-02-01",
+            44711,
+            3
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 28,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-09",
+            29341,
+            3
+          ],
+          [
+            "2026-01-25",
+            7242,
+            2
+          ],
+          [
+            "2026-02-22",
+            20503,
+            3
+          ],
+          [
+            "2026-01-02",
+            50361,
+            3
+          ],
+          [
+            "2026-02-01",
+            44711,
+            3
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 28,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-09",
+            29341,
+            3
+          ],
+          [
+            "2026-01-25",
+            7242,
+            2
+          ],
+          [
+            "2026-02-22",
+            20503,
+            3
+          ],
+          [
+            "2026-01-02",
+            50361,
+            3
+          ],
+          [
+            "2026-02-01",
+            44711,
+            3
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 28,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 14,
+      "kill_rate": 0.7,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 30,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-25",
+            7242,
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 0,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 72,
+      "kill_rate": 0.72,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 30,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-25",
+            7242,
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 0,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 373,
+      "kill_rate": 0.746,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 29,
+        "n_rows_b": 30,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-25",
+            7242,
+            2
+          ]
+        ],
+        "total_rows_only_in_a": 0,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "avg_retries"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            2.292683
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            2.764706
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "avg_retries"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            2.292683
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            2.764706
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "avg_retries"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            2.292683
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            2.764706
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.15,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 30,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-22",
+            3
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-22",
+            4
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 30,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-22",
+            3
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-22",
+            4
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q1_drop_distinct",
+      "base_query": "q1",
+      "kind": "mutant",
+      "description": "DISTINCT silently dropped: double-counts a user active twice in one day.",
+      "edge_case_hint": "needs duplicate (event_day, user_id) rows: raise key_pool_size pressure",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 30,
+        "n_rows_b": 30,
+        "columns": [
+          "event_day",
+          "active_users"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-22",
+            3
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-22",
+            4
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q1_safe_groupby_rewrite",
+      "base_query": "q1",
+      "kind": "safe_rewrite",
+      "description": "DISTINCT expressed via a nested dedup subquery instead of COUNT(DISTINCT ...).",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10235.6681
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10235.6681
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_inner_join",
+      "base_query": "q2",
+      "kind": "mutant",
+      "description": "LEFT JOIN narrowed to INNER JOIN: orders with no matching discount row vanish.",
+      "edge_case_hint": "needs orders with no matching discount row",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "net_revenue"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            10235.6681
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            0.0
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q2_safe_sum_distribution",
+      "base_query": "q2",
+      "kind": "safe_rewrite",
+      "description": "SUM(a - b) rewritten as SUM(a) - SUM(b); arithmetically identical over the same rows.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 31,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-07",
+            83627,
+            4
+          ],
+          [
+            "2026-01-23",
+            68901,
+            5
+          ],
+          [
+            "2026-02-12",
+            53105,
+            3
+          ],
+          [
+            "2026-02-14",
+            31723,
+            5
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-17",
+            61886,
+            2
+          ],
+          [
+            "2026-01-07",
+            5822,
+            3
+          ],
+          [
+            "2026-01-23",
+            27395,
+            3
+          ],
+          [
+            "2026-02-12",
+            89451,
+            1
+          ],
+          [
+            "2026-02-14",
+            1210,
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 8,
+        "total_rows_only_in_b": 8
+      }
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 31,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-07",
+            83627,
+            4
+          ],
+          [
+            "2026-01-23",
+            68901,
+            5
+          ],
+          [
+            "2026-02-12",
+            53105,
+            3
+          ],
+          [
+            "2026-02-14",
+            31723,
+            5
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-17",
+            61886,
+            2
+          ],
+          [
+            "2026-01-07",
+            5822,
+            3
+          ],
+          [
+            "2026-01-23",
+            27395,
+            3
+          ],
+          [
+            "2026-02-12",
+            89451,
+            1
+          ],
+          [
+            "2026-02-14",
+            1210,
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 8,
+        "total_rows_only_in_b": 8
+      }
+    },
+    {
+      "case_id": "q3_wrong_tiebreak_direction",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "ORDER BY severity DESC flipped to ASC: picks the least severe incident of the day instead of the most severe.",
+      "edge_case_hint": "needs more than one severity value on the same day",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 31,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-01-07",
+            83627,
+            4
+          ],
+          [
+            "2026-01-23",
+            68901,
+            5
+          ],
+          [
+            "2026-02-12",
+            53105,
+            3
+          ],
+          [
+            "2026-02-14",
+            31723,
+            5
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            "2026-01-17",
+            61886,
+            2
+          ],
+          [
+            "2026-01-07",
+            5822,
+            3
+          ],
+          [
+            "2026-01-23",
+            27395,
+            3
+          ],
+          [
+            "2026-02-12",
+            89451,
+            1
+          ],
+          [
+            "2026-02-14",
+            1210,
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 8,
+        "total_rows_only_in_b": 8
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-06",
+            64861,
+            3
+          ],
+          [
+            "2026-03-01",
+            50691,
+            3
+          ],
+          [
+            "2026-01-15",
+            83863,
+            3
+          ],
+          [
+            "2026-01-20",
+            47694,
+            3
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 30,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-06",
+            64861,
+            3
+          ],
+          [
+            "2026-03-01",
+            50691,
+            3
+          ],
+          [
+            "2026-01-15",
+            83863,
+            3
+          ],
+          [
+            "2026-01-20",
+            47694,
+            3
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 30,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_drop_partition",
+      "base_query": "q3",
+      "kind": "mutant",
+      "description": "PARTITION BY incident_day removed: ranks globally, returning only one incident total instead of one per day.",
+      "edge_case_hint": "needs more than one distinct incident_day",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 1,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            "2026-02-06",
+            64861,
+            3
+          ],
+          [
+            "2026-03-01",
+            50691,
+            3
+          ],
+          [
+            "2026-01-15",
+            83863,
+            3
+          ],
+          [
+            "2026-01-20",
+            47694,
+            3
+          ],
+          [
+            "2026-01-28",
+            88372,
+            4
+          ]
+        ],
+        "sample_rows_only_in_b": [],
+        "total_rows_only_in_a": 30,
+        "total_rows_only_in_b": 0
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 16,
+      "kill_rate": 0.8,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 32,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-15",
+            96601,
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 0,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 80,
+      "kill_rate": 0.8,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 32,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-15",
+            96601,
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 0,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q3_safe_rank_rewrite",
+      "base_query": "q3",
+      "kind": "conditional_rewrite",
+      "description": "ROW_NUMBER replaced by RANK, reasoned to be identical because the ORDER BY key (severity, incident_id) is unique within each partition. That reasoning holds only when no two rows are exact duplicates of each other: ROW_NUMBER breaks a tie between two byte-identical rows arbitrarily and keeps exactly one, while RANK assigns both the same rank and keeps both, so rn = 1 returns two rows instead of one. This project's own edge-case generator (which deliberately injects exact duplicate rows, modeling an upstream retry or replay bug) found this during development; it was not designed in as a mutant. See README / ARTICLE for why this is the corpus's most interesting result.",
+      "edge_case_hint": "needs an exact duplicate full row: caught only when the generator injects one",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 368,
+      "kill_rate": 0.736,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 31,
+        "n_rows_b": 32,
+        "columns": [
+          "incident_day",
+          "incident_id",
+          "severity"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [],
+        "sample_rows_only_in_b": [
+          [
+            "2026-02-15",
+            96601,
+            3
+          ]
+        ],
+        "total_rows_only_in_a": 0,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            18
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            18
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_exclusive_boundary",
+      "base_query": "q4",
+      "kind": "mutant",
+      "description": "<=30 narrowed to <30: jobs that take exactly 30 minutes flip from compliant to non-compliant.",
+      "edge_case_hint": "needs duration_minutes == 30 exactly: a classic boundary-value miss",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "within_sla"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            18
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            1
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q4_safe_demorgan_rewrite",
+      "base_query": "q4",
+      "kind": "safe_rewrite",
+      "description": "<=30 rewritten as NOT (>30); logically identical by De Morgan's law.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 20,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "avg_retries"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            1.390244
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            2.28
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 100,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "avg_retries"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            1.390244
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            2.28
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q5_drop_coalesce",
+      "base_query": "q5",
+      "kind": "mutant",
+      "description": "COALESCE(retry_count, 0) dropped: AVG silently excludes NULL rows from both the sum and the denominator instead of treating them as zero retries.",
+      "edge_case_hint": "needs NULL retry_count rows",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 500,
+      "kill_rate": 1.0,
+      "example_diff": {
+        "equivalent": false,
+        "seed": 20261018,
+        "n_rows_a": 1,
+        "n_rows_b": 1,
+        "columns": [
+          "avg_retries"
+        ],
+        "order_sensitive": false,
+        "sample_rows_only_in_a": [
+          [
+            1.390244
+          ]
+        ],
+        "sample_rows_only_in_b": [
+          [
+            2.28
+          ]
+        ],
+        "total_rows_only_in_a": 1,
+        "total_rows_only_in_b": 1
+      }
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 20,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 100,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    },
+    {
+      "case_id": "q5_safe_division_rewrite",
+      "base_query": "q5",
+      "kind": "safe_rewrite",
+      "description": "AVG(COALESCE(x,0)) rewritten as explicit SUM/COUNT; identical once NULLs are coalesced before the sum.",
+      "edge_case_hint": "none: should never be killed",
+      "edge_case_bias": 0.35,
+      "n_trials": 500,
+      "rows_per_trial": 40,
+      "n_differing": 0,
+      "kill_rate": 0.0,
+      "example_diff": null
+    }
+  ]
+}
